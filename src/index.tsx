@@ -482,6 +482,59 @@ app.get('/', (c) => {
                 <!-- Cart items will be here -->
             </div>
             <div class="border-t border-gray-700 pt-6">
+                <!-- Payment Method Selection -->
+                <div class="mb-6">
+                    <label class="block text-lg font-bold mb-3">
+                        <i class="fas fa-credit-card ml-2 text-yellow-500"></i>
+                        اختر طريقة الدفع:
+                    </label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-gray-700 transition">
+                            <input type="radio" name="paymentMethod" value="cash" class="w-5 h-5 text-yellow-500" checked>
+                            <div>
+                                <i class="fas fa-money-bill-wave text-green-500"></i>
+                                <span class="mr-2 font-bold">كاش</span>
+                                <p class="text-xs text-gray-400">الدفع عند الاستلام</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-gray-700 transition">
+                            <input type="radio" name="paymentMethod" value="vodafone" class="w-5 h-5 text-yellow-500">
+                            <div>
+                                <i class="fas fa-mobile-alt text-red-500"></i>
+                                <span class="mr-2 font-bold">فودافون كاش</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-gray-700 transition">
+                            <input type="radio" name="paymentMethod" value="instapay" class="w-5 h-5 text-yellow-500">
+                            <div>
+                                <i class="fas fa-university text-blue-500"></i>
+                                <span class="mr-2 font-bold">انستا باي</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-gray-700 transition">
+                            <input type="radio" name="paymentMethod" value="wallet" class="w-5 h-5 text-yellow-500">
+                            <div>
+                                <i class="fas fa-wallet text-yellow-500"></i>
+                                <span class="mr-2 font-bold">محفظة إلكترونية</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Additional Notes -->
+                <div class="mb-6">
+                    <label class="block text-lg font-bold mb-3">
+                        <i class="fas fa-comment-dots ml-2 text-yellow-500"></i>
+                        ملاحظات إضافية (اختياري):
+                    </label>
+                    <textarea 
+                        id="orderNotes" 
+                        placeholder="مثال: زيادة ملح، تقليل صوص، بدون بصل، إلخ..."
+                        class="w-full bg-gray-800 text-white p-4 rounded-xl border border-gray-700 focus:border-yellow-500 focus:outline-none resize-none"
+                        rows="3"
+                    ></textarea>
+                </div>
+                
                 <div class="flex justify-between items-center text-2xl font-bold mb-6">
                     <span>الإجمالي:</span>
                     <span class="gradient-text" id="cartTotal">0 جنيه</span>

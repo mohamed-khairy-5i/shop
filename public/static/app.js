@@ -220,6 +220,23 @@ function checkout() {
         return
     }
     
+    // Get payment method
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')
+    if (!paymentMethod) {
+        showNotification('الرجاء اختيار طريقة الدفع', 'error')
+        return
+    }
+    
+    const paymentMethods = {
+        'cash': '💵 الدفع عند الاستلام (كاش)',
+        'vodafone': '📱 فودافون كاش',
+        'instapay': '🏦 انستا باي',
+        'wallet': '👛 محفظة إلكترونية'
+    }
+    
+    // Get order notes
+    const orderNotes = document.getElementById('orderNotes').value.trim()
+    
     // Create order message
     let message = '🍔 *طلب جديد من موقع برجر تست*\n\n'
     message += '📋 *تفاصيل الطلب:*\n'
@@ -233,11 +250,15 @@ function checkout() {
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
     message += `💰 *الإجمالي الكلي: ${total} جنيه*\n\n`
-    message += '📍 *طرق الدفع المتاحة:*\n'
-    message += '• الدفع عند الاستلام (كاش)\n'
-    message += '• فودافون كاش\n'
-    message += '• انستا باي\n'
-    message += '• محافظ إلكترونية\n\n'
+    
+    // Add payment method
+    message += `💳 *طريقة الدفع المختارة:*\n${paymentMethods[paymentMethod.value]}\n\n`
+    
+    // Add order notes if available
+    if (orderNotes) {
+        message += `📝 *ملاحظات إضافية:*\n${orderNotes}\n\n`
+    }
+    
     message += '✨ شكراً لاختيارك برجر تست!\n'
     message += 'سنتواصل معك قريباً لتأكيد الطلب والعنوان 📞'
     
@@ -253,6 +274,9 @@ function checkout() {
         cart = []
         updateCart()
         toggleCart()
+        // Reset payment method and notes
+        document.querySelector('input[name="paymentMethod"][value="cash"]').checked = true
+        document.getElementById('orderNotes').value = ''
         showNotification('تم إرسال الطلب! سنتواصل معك قريباً', 'success')
     }, 1000)
 }
