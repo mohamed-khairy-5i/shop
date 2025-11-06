@@ -1,1 +1,64 @@
-h1 { font-family: Arial, Helvetica, sans-serif; }
+/* Additional custom styles if needed */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    --bg-dark: #1a1a1a;
+    --bg-darker: #0f0f0f;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+}
+
+/* Loading animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+        to right,
+        #1a1a1a 0%,
+        #2d2d2d 50%,
+        #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+}
+
+/* Pulse animation for special elements */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
