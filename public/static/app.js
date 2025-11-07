@@ -32,32 +32,68 @@ function displayMenu(category = 'all') {
         ? menuItems 
         : menuItems.filter(item => item.category === category)
     
-    grid.innerHTML = filtered.map(item => `
-        <div class="bg-gray-900 rounded-2xl overflow-hidden card-hover" data-category="${item.category}">
-            <div class="relative">
-                <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
-                ${item.popular ? `
-                    <span class="absolute top-3 right-3 popular-badge">
-                        <i class="fas fa-fire ml-1"></i>
-                        الأكثر طلباً
-                    </span>
-                ` : ''}
-            </div>
-            <div class="p-5">
-                <h3 class="text-xl font-bold mb-2">${item.name}</h3>
-                <p class="text-sm text-gray-400 mb-1">${item.nameEn}</p>
-                <p class="text-gray-400 text-sm mb-4">${item.description}</p>
-                <div class="flex items-center justify-between">
-                    <span class="price-tag text-lg">${item.price} جنيه</span>
-                    <button onclick="addToCart(${item.id}, 'menu')" 
-                            class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-full font-bold transition">
-                        <i class="fas fa-plus ml-1"></i>
-                        إضافة
-                    </button>
+    grid.innerHTML = filtered.map(item => {
+        // Determine price display
+        let priceDisplay = ''
+        if (item.priceSingle && item.priceDouble) {
+            priceDisplay = `
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-400">Double:</span>
+                        <span class="price-tag text-sm">${item.priceDouble} د.ل</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-400">Single:</span>
+                        <span class="price-tag text-sm">${item.priceSingle} د.ل</span>
+                    </div>
+                </div>
+            `
+        } else if (item.priceDouble) {
+            priceDisplay = `<span class="price-tag text-lg">${item.priceDouble} د.ل</span>`
+        }
+        
+        return `
+            <div class="bg-gray-900 rounded-2xl overflow-hidden card-hover" data-category="${item.category}">
+                <div class="relative">
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
+                    ${item.popular ? `
+                        <span class="absolute top-3 right-3 popular-badge">
+                            <i class="fas fa-fire ml-1"></i>
+                            الأكثر طلباً
+                        </span>
+                    ` : ''}
+                </div>
+                <div class="p-5">
+                    <h3 class="text-xl font-bold mb-2">${item.name}</h3>
+                    <p class="text-sm text-gray-400 mb-1">${item.nameEn}</p>
+                    <p class="text-gray-400 text-sm mb-4">${item.description}</p>
+                    <div class="mb-4">
+                        ${priceDisplay}
+                    </div>
+                    ${item.sizes.length > 1 ? `
+                        <div class="flex gap-2">
+                            <button onclick="addToCart(${item.id}, 'menu', 'Double')" 
+                                    class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-2 rounded-full font-bold transition text-sm">
+                                <i class="fas fa-plus ml-1"></i>
+                                Double
+                            </button>
+                            <button onclick="addToCart(${item.id}, 'menu', 'Single')" 
+                                    class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-2 rounded-full font-bold transition text-sm">
+                                <i class="fas fa-plus ml-1"></i>
+                                Single
+                            </button>
+                        </div>
+                    ` : `
+                        <button onclick="addToCart(${item.id}, 'menu', 'Double')" 
+                                class="w-full bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-full font-bold transition">
+                            <i class="fas fa-plus ml-1"></i>
+                            إضافة
+                        </button>
+                    `}
                 </div>
             </div>
-        </div>
-    `).join('')
+        `
+    }).join('')
 }
 
 // Display sides and drinks
@@ -69,8 +105,8 @@ function displaySidesDrinks() {
             <div class="p-3">
                 <h4 class="font-bold mb-2 text-sm">${item.name}</h4>
                 <div class="flex items-center justify-between">
-                    <span class="text-yellow-500 font-bold text-sm">${item.price} جنيه</span>
-                    <button onclick="addToCart(${item.id}, 'sides')" 
+                    <span class="text-yellow-500 font-bold text-sm">${item.price} د.ل</span>
+                    <button onclick="addToCart(${item.id}, 'sides', 'Single')" 
                             class="bg-yellow-500 hover:bg-yellow-600 text-black p-2 rounded-full transition">
                         <i class="fas fa-plus"></i>
                     </button>
@@ -93,13 +129,17 @@ function filterMenu(category) {
 }
 
 // Add item to cart
-function addToCart(itemId, type) {
+function addToCart(itemId, type, size = 'Double') {
     const items = type === 'menu' ? menuItems : sidesAndDrinks
     const item = items.find(i => i.id === itemId)
     
     if (!item) return
     
-    const existingItem = cart.find(i => i.id === itemId && i.type === type)
+    // For menu items with sizes, set the price based on size
+    let price = item.price || (size === 'Single' ? item.priceSingle : item.priceDouble)
+    
+    // Create unique identifier including size
+    const existingItem = cart.find(i => i.id === itemId && i.type === type && i.size === size)
     
     if (existingItem) {
         existingItem.quantity++
@@ -107,6 +147,9 @@ function addToCart(itemId, type) {
         cart.push({
             ...item,
             type,
+            size,
+            price,
+            displayName: type === 'menu' && item.sizes.length > 1 ? `${item.name} (${size})` : item.name,
             quantity: 1
         })
     }
@@ -116,8 +159,8 @@ function addToCart(itemId, type) {
 }
 
 // Remove from cart
-function removeFromCart(itemId, type) {
-    const index = cart.findIndex(i => i.id === itemId && i.type === type)
+function removeFromCart(itemId, type, size) {
+    const index = cart.findIndex(i => i.id === itemId && i.type === type && i.size === size)
     if (index > -1) {
         cart.splice(index, 1)
         updateCart()
@@ -126,12 +169,12 @@ function removeFromCart(itemId, type) {
 }
 
 // Update cart quantity
-function updateQuantity(itemId, type, change) {
-    const item = cart.find(i => i.id === itemId && i.type === type)
+function updateQuantity(itemId, type, size, change) {
+    const item = cart.find(i => i.id === itemId && i.type === type && i.size === size)
     if (item) {
         item.quantity += change
         if (item.quantity <= 0) {
-            removeFromCart(itemId, type)
+            removeFromCart(itemId, type, size)
         } else {
             updateCart()
         }
@@ -160,7 +203,7 @@ function updateCart() {
     }
     
     // Update total
-    cartTotal.textContent = total + ' جنيه'
+    cartTotal.textContent = total + ' د.ل'
     
     // Update cart items
     if (cart.length === 0) {
@@ -177,21 +220,21 @@ function updateCart() {
                 <div class="flex items-center gap-4">
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
                     <div>
-                        <h4 class="font-bold">${item.name}</h4>
-                        <p class="text-yellow-500 font-bold">${item.price} جنيه</p>
+                        <h4 class="font-bold">${item.displayName || item.name}</h4>
+                        <p class="text-yellow-500 font-bold">${item.price} د.ل</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="updateQuantity(${item.id}, '${item.type}', -1)" 
+                    <button onclick="updateQuantity(${item.id}, '${item.type}', '${item.size}', -1)" 
                             class="bg-gray-700 hover:bg-gray-600 w-8 h-8 rounded-full">
                         <i class="fas fa-minus"></i>
                     </button>
                     <span class="text-xl font-bold w-8 text-center">${item.quantity}</span>
-                    <button onclick="updateQuantity(${item.id}, '${item.type}', 1)" 
+                    <button onclick="updateQuantity(${item.id}, '${item.type}', '${item.size}', 1)" 
                             class="bg-gray-700 hover:bg-gray-600 w-8 h-8 rounded-full">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button onclick="removeFromCart(${item.id}, '${item.type}')  "
+                    <button onclick="removeFromCart(${item.id}, '${item.type}', '${item.size}')"
                             class="bg-red-600 hover:bg-red-700 w-8 h-8 rounded-full mr-2">
                         <i class="fas fa-trash"></i>
                     </button>
@@ -274,14 +317,14 @@ function checkout() {
     message += '📋 *تفاصيل الطلب:*\n'
     
     cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name}\n`
+        message += `${index + 1}. ${item.displayName || item.name}\n`
         message += `   الكمية: ${item.quantity}\n`
-        message += `   السعر: ${item.price} جنيه\n`
-        message += `   الإجمالي: ${item.price * item.quantity} جنيه\n\n`
+        message += `   السعر: ${item.price} د.ل\n`
+        message += `   الإجمالي: ${item.price * item.quantity} د.ل\n\n`
     })
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    message += `💰 *الإجمالي الكلي: ${total} جنيه*\n\n`
+    message += `💰 *الإجمالي الكلي: ${total} د.ل*\n\n`
     
     // Add payment method
     message += `💳 *طريقة الدفع المختارة:*\n${paymentMethods[paymentMethod.value]}\n\n`

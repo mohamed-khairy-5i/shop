@@ -14,83 +14,63 @@ app.use('/static/*', serveStatic({ root: './' }))
 const menuItems = [
   {
     id: 1,
-    name: 'برجر كلاسيك',
-    nameEn: 'Classic Burger',
-    description: 'برجر لحم طازج مع خس، طماطم، بصل وصوص خاص',
-    price: 85,
+    name: 'جوسي لوسي',
+    nameEn: 'Juicy Lucy',
+    description: 'خس + خيار مخلل + قطعة 180 جرام على الفحم + صوص تيست المميز + شيدر + بطاطس',
+    priceDouble: 100,
+    priceSingle: 70,
+    sizes: ['Double', 'Single'],
     category: 'beef',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop',
+    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/436ec3e8-220f-4616-a416-73762c8550b1.jpeg',
     popular: true
   },
   {
     id: 2,
-    name: 'برجر تشيز',
-    nameEn: 'Cheese Burger',
-    description: 'برجر لحم مع جبنة تشيدر مذابة وصوص الباربيكيو',
-    price: 95,
+    name: 'هوت فاير',
+    nameEn: 'Hot Fire',
+    description: 'خس + خيار مخلل + برجر على الفحم + مايو + فلفل ألوان + أناناس + بطاطس',
+    priceDouble: 110,
+    priceSingle: 80,
+    sizes: ['Double', 'Single'],
     category: 'beef',
-    image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop',
+    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/8b910823-cf8b-4027-b20c-e9d7d4663226.jpeg',
     popular: true
   },
   {
     id: 3,
-    name: 'برجر دبل تشيز',
-    nameEn: 'Double Cheese Burger',
-    description: 'قطعتين لحم مع جبنة مضاعفة وخضروات طازجة',
-    price: 125,
+    name: 'بيج تيست المميز',
+    nameEn: 'Big Taste Special',
+    description: 'خس + خيار مخلل + 2 استربس + 2 قطعة برجر على الفحم + صوص تيست المميز + جبنة سايحة + بطاطس',
+    priceDouble: 130,
+    priceSingle: null,
+    sizes: ['Double'],
     category: 'beef',
-    image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=400&h=300&fit=crop',
+    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/dea4bbea-18bf-44f4-96e3-98bae1ad722b.jpeg',
     popular: true
   },
   {
     id: 4,
-    name: 'برجر دجاج مقرمش',
-    nameEn: 'Crispy Chicken Burger',
-    description: 'دجاج مقرمش مع خس وصوص مايونيز بالثوم',
-    price: 75,
-    category: 'chicken',
-    image: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop',
+    name: 'سنوبي',
+    nameEn: 'Snoopy',
+    description: 'خس + قطعة برجر 180 جرام على الفحم + سجق شرقي + بيف بيكون',
+    priceDouble: 110,
+    priceSingle: null,
+    sizes: ['Double'],
+    category: 'beef',
+    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/4f075414-c6a2-4382-81ff-120b71b8adc1.jpeg',
     popular: false
   },
   {
     id: 5,
-    name: 'برجر دجاج حار',
-    nameEn: 'Spicy Chicken Burger',
-    description: 'دجاج حار مع جالابينو وصوص حار',
-    price: 85,
-    category: 'chicken',
-    image: 'https://images.unsplash.com/photo-1608767221051-2b9d18f35a2f?w=400&h=300&fit=crop',
-    popular: false
-  },
-  {
-    id: 6,
-    name: 'برجر ماشروم سويس',
-    nameEn: 'Mushroom Swiss Burger',
-    description: 'برجر لحم مع فطر مشوي وجبنة سويس',
-    price: 115,
+    name: 'أورجينال',
+    nameEn: 'Original',
+    description: 'خس + خيار مخلل + قطعة 180 جرام على الفحم + رانش + تستي جبنة موتزاريلا سايحة + بطاطس',
+    priceDouble: 105,
+    priceSingle: 75,
+    sizes: ['Double', 'Single'],
     category: 'beef',
-    image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop',
-    popular: false
-  },
-  {
-    id: 7,
-    name: 'برجر باكون',
-    nameEn: 'Bacon Burger',
-    description: 'برجر لحم مع باكون مقرمش وجبنة وصوص باربيكيو',
-    price: 135,
-    category: 'beef',
-    image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop',
+    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/cf50d73f-cf25-47aa-aa25-9d497cdf45d9.jpeg',
     popular: true
-  },
-  {
-    id: 8,
-    name: 'برجر نباتي',
-    nameEn: 'Veggie Burger',
-    description: 'برجر نباتي صحي مع خضروات طازجة',
-    price: 70,
-    category: 'veggie',
-    image: 'https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400&h=300&fit=crop',
-    popular: false
   }
 ]
 
@@ -343,19 +323,7 @@ app.get('/', (c) => {
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 <button onclick="filterMenu('all')" class="category-btn active px-6 py-3 rounded-full bg-gray-800 hover:bg-gray-700">
                     <i class="fas fa-th-large ml-2"></i>
-                    الكل
-                </button>
-                <button onclick="filterMenu('beef')" class="category-btn px-6 py-3 rounded-full bg-gray-800 hover:bg-gray-700">
-                    <i class="fas fa-drumstick-bite ml-2"></i>
-                    لحم بقري
-                </button>
-                <button onclick="filterMenu('chicken')" class="category-btn px-6 py-3 rounded-full bg-gray-800 hover:bg-gray-700">
-                    <i class="fas fa-egg ml-2"></i>
-                    دجاج
-                </button>
-                <button onclick="filterMenu('veggie')" class="category-btn px-6 py-3 rounded-full bg-gray-800 hover:bg-gray-700">
-                    <i class="fas fa-leaf ml-2"></i>
-                    نباتي
+                    جميع البرجر
                 </button>
             </div>
             
