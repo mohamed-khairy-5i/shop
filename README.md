@@ -6,6 +6,22 @@
 
 موقع حديث وجذاب لمطعم برجر متخصص في تقديم أشهى أنواع البرجر الطازج. تم تصميم الموقع بعناية فائقة ليوفر تجربة مستخدم رائعة مع إمكانية الطلب مباشرة عبر واتساب.
 
+**تم تحويل المشروع من Cloudflare Pages إلى Netlify** ليكون متوافقاً مع منصة Netlify المجانية.
+
+## 🔗 الروابط
+
+- **GitHub Repository**: https://github.com/mohamed-khairy-5i/shop
+- **Netlify Deployment**: سيتم نشره تلقائياً بعد الربط مع Netlify
+
+## 🛠️ التقنيات المستخدمة
+
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Styling**: TailwindCSS (via CDN)
+- **Icons**: Font Awesome
+- **Backend**: Netlify Serverless Functions
+- **Hosting**: Netlify (Static Site + Functions)
+- **Version Control**: Git & GitHub
+
 ## 🎯 الميزات المكتملة
 
 ### ✅ الصفحة الرئيسية (Hero Section)
