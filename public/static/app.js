@@ -40,16 +40,16 @@ function displayMenu(category = 'all') {
                 <div class="flex flex-col gap-2">
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-400">Double:</span>
-                        <span class="price-tag text-sm">${item.priceDouble} د.ل</span>
+                        <span class="price-tag text-sm">${item.priceDouble} ج.م</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-400">Single:</span>
-                        <span class="price-tag text-sm">${item.priceSingle} د.ل</span>
+                        <span class="price-tag text-sm">${item.priceSingle} ج.م</span>
                     </div>
                 </div>
             `
         } else if (item.priceDouble) {
-            priceDisplay = `<span class="price-tag text-lg">${item.priceDouble} د.ل</span>`
+            priceDisplay = `<span class="price-tag text-lg">${item.priceDouble} ج.م</span>`
         }
         
         return `
@@ -105,7 +105,7 @@ function displaySidesDrinks() {
             <div class="p-3">
                 <h4 class="font-bold mb-2 text-sm">${item.name}</h4>
                 <div class="flex items-center justify-between">
-                    <span class="text-yellow-500 font-bold text-sm">${item.price} د.ل</span>
+                    <span class="text-yellow-500 font-bold text-sm">${item.price} ج.م</span>
                     <button onclick="addToCart(${item.id}, 'sides', 'Single')" 
                             class="bg-yellow-500 hover:bg-yellow-600 text-black p-2 rounded-full transition">
                         <i class="fas fa-plus"></i>
@@ -203,7 +203,7 @@ function updateCart() {
     }
     
     // Update total
-    cartTotal.textContent = total + ' د.ل'
+    cartTotal.textContent = total + ' ج.م'
     
     // Update cart items
     if (cart.length === 0) {
@@ -221,7 +221,7 @@ function updateCart() {
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
                     <div>
                         <h4 class="font-bold">${item.displayName || item.name}</h4>
-                        <p class="text-yellow-500 font-bold">${item.price} د.ل</p>
+                        <p class="text-yellow-500 font-bold">${item.price} ج.م</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -319,12 +319,12 @@ function checkout() {
     cart.forEach((item, index) => {
         message += `${index + 1}. ${item.displayName || item.name}\n`
         message += `   الكمية: ${item.quantity}\n`
-        message += `   السعر: ${item.price} د.ل\n`
-        message += `   الإجمالي: ${item.price * item.quantity} د.ل\n\n`
+        message += `   السعر: ${item.price} ج.م\n`
+        message += `   الإجمالي: ${item.price * item.quantity} ج.م\n\n`
     })
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    message += `💰 *الإجمالي الكلي: ${total} د.ل*\n\n`
+    message += `💰 *الإجمالي الكلي: ${total} ج.م*\n\n`
     
     // Add payment method
     message += `💳 *طريقة الدفع المختارة:*\n${paymentMethods[paymentMethod.value]}\n\n`
