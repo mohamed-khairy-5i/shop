@@ -21,7 +21,7 @@ const menuItems = [
     priceSingle: 70,
     sizes: ['Double', 'Single'],
     category: 'beef',
-    image: 'https://cdn1.genspark.ai/user-upload-image/5_generated/436ec3e8-220f-4616-a416-73762c8550b1.jpeg',
+    image: 'https://www.dropbox.com/scl/fi/on41weu1rihfan10m44hx/.png?rlkey=tmxfhv09ohvwgakq2nckzae7b&st=ceoeo7l3&dl=1',
     popular: true
   },
   {
@@ -530,7 +530,7 @@ app.get('/', (c) => {
                 
                 <div class="flex justify-between items-center text-2xl font-bold mb-6">
                     <span>الإجمالي:</span>
-                    <span class="gradient-text" id="cartTotal">0 جنيه</span>
+                    <span class="gradient-text" id="cartTotal">0 د.ل</span>
                 </div>
                 <button onclick="checkout()" class="w-full btn-primary text-black py-4 rounded-full text-xl font-bold">
                     <i class="fas fa-check-circle ml-2"></i>
