@@ -255,7 +255,7 @@ app.get('/', (c) => {
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4 space-x-reverse">
-                    <i class="fas fa-hamburger text-4xl gradient-text burger-icon"></i>
+                    <img src="https://www.dropbox.com/scl/fi/x8x2jea9fq5xvw2uk4l1w/c0bd7e5d-1447-4b0d-a6d4-80a71b86d5a4_20251107_083427_.png?rlkey=alcz90s3hh7r2e3ooy0dvwvju&st=dnd41d42&dl=1" alt="Burger Taste Logo" class="h-16 w-16 object-contain">
                     <div>
                         <h1 class="text-2xl font-bold gradient-text">Burger Taste</h1>
                         <p class="text-sm text-gray-400">برجر تست - أشهى البرجر الطازج</p>
@@ -289,7 +289,7 @@ app.get('/', (c) => {
     <!-- Hero Section -->
     <section id="home" class="hero-section min-h-screen flex items-center justify-center text-center py-20">
         <div class="container mx-auto px-4">
-            <i class="fas fa-hamburger text-8xl gradient-text mb-6 burger-icon"></i>
+            <img src="https://www.dropbox.com/scl/fi/x8x2jea9fq5xvw2uk4l1w/c0bd7e5d-1447-4b0d-a6d4-80a71b86d5a4_20251107_083427_.png?rlkey=alcz90s3hh7r2e3ooy0dvwvju&st=dnd41d42&dl=1" alt="Burger Taste Logo" class="h-32 w-32 mx-auto mb-6 object-contain">
             <h2 class="text-5xl md:text-7xl font-bold mb-6">
                 مرحباً بك في <span class="gradient-text">برجر تست</span>
             </h2>
@@ -447,7 +447,7 @@ app.get('/', (c) => {
     <footer class="bg-black py-8 border-t border-gray-800">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-4 space-x-reverse mb-4">
-                <i class="fas fa-hamburger text-3xl gradient-text"></i>
+                <img src="https://www.dropbox.com/scl/fi/x8x2jea9fq5xvw2uk4l1w/c0bd7e5d-1447-4b0d-a6d4-80a71b86d5a4_20251107_083427_.png?rlkey=alcz90s3hh7r2e3ooy0dvwvju&st=dnd41d42&dl=1" alt="Burger Taste Logo" class="h-12 w-12 object-contain">
                 <h3 class="text-2xl font-bold gradient-text">Burger Taste</h3>
             </div>
             <p class="text-gray-400 mb-4">برجر تست - أشهى البرجر الطازج في مصر</p>
@@ -482,9 +482,34 @@ app.get('/', (c) => {
                 <!-- Cart items will be here -->
             </div>
             <div class="border-t border-gray-700 pt-6">
+                <!-- Customer Information -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold mb-4">
+                        <i class="fas fa-user ml-2 text-yellow-500"></i>
+                        بيانات العميل:
+                    </h4>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">الاسم <span class="text-red-500">*</span></label>
+                            <input type="text" id="customerName" placeholder="أدخل اسمك الكامل" 
+                                   class="w-full bg-gray-800 text-white p-3 rounded-xl border border-gray-700 focus:border-yellow-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">رقم الهاتف <span class="text-red-500">*</span></label>
+                            <input type="tel" id="customerPhone" placeholder="مثال: 01012345678" 
+                                   class="w-full bg-gray-800 text-white p-3 rounded-xl border border-gray-700 focus:border-yellow-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">العنوان بالتفصيل <span class="text-red-500">*</span></label>
+                            <textarea id="customerAddress" placeholder="المنطقة، الشارع، رقم المبنى، الدور، الشقة..." 
+                                      class="w-full bg-gray-800 text-white p-3 rounded-xl border border-gray-700 focus:border-yellow-500 focus:outline-none resize-none" 
+                                      rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
                 <!-- Payment Method Selection -->
                 <div class="mb-6">
-                    <label class="block text-lg font-bold mb-3">
+                    <label class="block text-lg font-bold mb-4">
                         <i class="fas fa-credit-card ml-2 text-yellow-500"></i>
                         اختر طريقة الدفع:
                     </label>

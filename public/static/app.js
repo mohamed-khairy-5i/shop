@@ -220,6 +220,30 @@ function checkout() {
         return
     }
     
+    // Get customer information
+    const customerName = document.getElementById('customerName').value.trim()
+    const customerPhone = document.getElementById('customerPhone').value.trim()
+    const customerAddress = document.getElementById('customerAddress').value.trim()
+    
+    // Validate customer information
+    if (!customerName) {
+        showNotification('الرجاء إدخال الاسم', 'error')
+        document.getElementById('customerName').focus()
+        return
+    }
+    
+    if (!customerPhone) {
+        showNotification('الرجاء إدخال رقم الهاتف', 'error')
+        document.getElementById('customerPhone').focus()
+        return
+    }
+    
+    if (!customerAddress) {
+        showNotification('الرجاء إدخال العنوان بالتفصيل', 'error')
+        document.getElementById('customerAddress').focus()
+        return
+    }
+    
     // Get payment method
     const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')
     if (!paymentMethod) {
@@ -239,6 +263,14 @@ function checkout() {
     
     // Create order message
     let message = '🍔 *طلب جديد من موقع برجر تست*\n\n'
+    
+    // Add customer information
+    message += '👤 *بيانات العميل:*\n'
+    message += `الاسم: ${customerName}\n`
+    message += `رقم الهاتف: ${customerPhone}\n`
+    message += `العنوان: ${customerAddress}\n\n`
+    
+    message += '━━━━━━━━━━━━━━━━━━━━\n\n'
     message += '📋 *تفاصيل الطلب:*\n'
     
     cart.forEach((item, index) => {
@@ -260,7 +292,7 @@ function checkout() {
     }
     
     message += '✨ شكراً لاختيارك برجر تست!\n'
-    message += 'سنتواصل معك قريباً لتأكيد الطلب والعنوان 📞'
+    message += 'سنتواصل معك قريباً للتأكيد والتوصيل 📞'
     
     // Encode message for WhatsApp
     const encodedMessage = encodeURIComponent(message)
@@ -274,7 +306,10 @@ function checkout() {
         cart = []
         updateCart()
         toggleCart()
-        // Reset payment method and notes
+        // Reset form
+        document.getElementById('customerName').value = ''
+        document.getElementById('customerPhone').value = ''
+        document.getElementById('customerAddress').value = ''
         document.querySelector('input[name="paymentMethod"][value="cash"]').checked = true
         document.getElementById('orderNotes').value = ''
         showNotification('تم إرسال الطلب! سنتواصل معك قريباً', 'success')
